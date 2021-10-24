@@ -1,0 +1,17 @@
+.flex-column {
+  display: flex;
+  border: 1px solid red;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  border: 1px solid red;
+  padding:10px;
+  flex-direction: row;
+  background-color: yellowgreen;
+}
+
+.test {
+  background-color: turquoise;
+}

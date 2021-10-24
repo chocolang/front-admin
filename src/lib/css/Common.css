@@ -1,0 +1,11 @@
+:root {
+  --main-bg-color: '#ff00ff'
+}
+
+.btn-main-action {
+  background-color: var(--main-bg-color)
+}
+
+.btn-sub-action {
+
+}
