@@ -1,5 +1,5 @@
-import React, { createContext, useCallback, useEffect, useState } from "react";
-import { getSampleWords, Word } from "../../model/api/Word";
+import React, { createContext, useCallback, useState } from "react";
+import { getSampleWords, WordItem } from "../../model/api/Word";
 import { IWordListContext } from "./@types";
 
 const defaultContext: IWordListContext = {
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const WordListContextProvider = ({ children }: Props) => {
-  const [words, setWords] = useState<Array<Word>>();
+  const [words, setWords] = useState<Array<WordItem>>();
 
   const getWordList = useCallback((id: string) => {
     console.log(`id is ${id}`)

@@ -10,7 +10,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import More from "./pages/More";
 import WordList from "./pages/WordList";
-import WordWrite from "./pages/WordWrite";
+import WordEdit from "./pages/WordEdit";
+import WordCreate from "./pages/WordCreate";
 
 function App() {
   console.log('[App] start...')
@@ -27,7 +28,8 @@ function App() {
         <Route component={Home} path="/" exact></Route>
         <Route component={More} path="/more"></Route>
         <Route component={WordList} path="/wordList"></Route>
-        <Route component={WordWrite} path="/wordWrite"></Route>
+        <Route component={WordCreate} path="/WordCreate"></Route>
+        <Route component={WordEdit} path="/WordEdit/:id"></Route>
       </Layout>
     </div>
   ) : (

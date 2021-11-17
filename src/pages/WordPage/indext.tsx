@@ -1,18 +1,23 @@
 import React from "react";
-import { RouteComponentProps } from "react-router";
 import WordContainer from "../../container/WordContainer";
-import { gapView } from "../../lib/constant";
+import { GAP_VIEW_HEIGHT } from "../../lib/constant";
+import { WordItem } from "../../model/api/Word";
 import { StyledPageBody } from "../../styled/Common";
 import { StyledLargeMenu } from "../../styled/Text";
+//import Layout from "../../components/Layout";
 
-const WordWrite = (props: RouteComponentProps) => {
+interface Props {
+  word: WordItem
+}
+
+const WordPage = ({ word }: Props) => {
   console.log("[WordWrite] start...");
   return (
     <StyledPageBody>
       <StyledLargeMenu>단어</StyledLargeMenu>
-      <WordContainer style={{ marginTop: gapView }} />
+      <WordContainer style={{ marginTop: GAP_VIEW_HEIGHT }} />
     </StyledPageBody>
   );
 };
 
-export default WordWrite;
+export default WordPage;

@@ -1,22 +1,26 @@
 import React, { useContext, useEffect } from "react";
 import { RouteComponentProps } from "react-router";
 import '../../App.css'
-import { WordListContext, WordListContextProvider } from "../../context/word";
-import { IWordListContext } from "../../context/word/@types";
-import { gapView } from "../../lib/constant";
-import { Word } from "../../model/api/Word";
+import { WordListContext, WordListContextProvider } from "../../context/wordList";
+import { IWordListContext } from "../../context/wordList/@types";
+import { GAP_VIEW_HEIGHT } from "../../lib/constant";
+import { WordItem } from "../../model/api/Word";
 import { StyledActionButton } from "../../styled/Button";
 import { StyledPageBody } from "../../styled/Common";
 import { StyledLargeMenu, StyledListItem, StyledListHeaderItem } from "../../styled/Text";
 
 const WordList = (props: RouteComponentProps) => {
   console.log("[WordList] start...");
-  const { history, location, match } = props
+  const { history, /*location, match*/ } = props
   const { words, getWordList } = useContext<IWordListContext>(WordListContext);
 
   useEffect(() => {
     getWordList('this is jwlee');
   }, [getWordList])
+
+  const handleOnItemClick = (item: WordItem) => {
+    history.push(`/wordEdit/${item.id}`);
+  }
 
   return (
     <StyledPageBody>
@@ -24,7 +28,7 @@ const WordList = (props: RouteComponentProps) => {
         <StyledLargeMenu>단어 리스트</StyledLargeMenu>
         <div>
           <StyledActionButton onClick={() => {
-            history.push('/wordWrite');
+            history.push('/wordCreate');
           }}>생성</StyledActionButton>
           <StyledActionButton onClick={() => {
             history.push('/wordList')
@@ -32,7 +36,7 @@ const WordList = (props: RouteComponentProps) => {
         </div>
       </div>
 
-      <div className='flex-row' style={{ marginTop: gapView }}>
+      <div className='flex-row' style={{ marginTop: GAP_VIEW_HEIGHT }}>
         <StyledListHeaderItem style={{ flex: 1 }}>번호</StyledListHeaderItem>
         <StyledListHeaderItem style={{ flex: 4 }}>이름</StyledListHeaderItem>
         <StyledListHeaderItem style={{ flex: 4 }}>포인트</StyledListHeaderItem>
@@ -40,16 +44,20 @@ const WordList = (props: RouteComponentProps) => {
         <StyledListHeaderItem style={{ flex: 5 }}>설명</StyledListHeaderItem>
       </div>
 
-      <div className='flex-column' style={{ marginTop: gapView }}>
-        {words?.map((item) => WordItem(item))}
+      <div className='flex-column' style={{ marginTop: GAP_VIEW_HEIGHT }}>
+        {words?.map((item) => WordItemView(item, handleOnItemClick))}
       </div>
     </StyledPageBody>
   );
 };
 
-const WordItem = (item: Word) => {
+const WordItemView = (item: WordItem, onItemClick?: (item: WordItem) => void) => {
+  const handleOnClick = () => {
+    console.log('clicked!', item.name)
+    onItemClick && onItemClick(item)
+  }
   return (
-    <div className='flex-row' key={`word-item-${item.id}`}>
+    <div className='flex-row' key={`word-item-${item.id}`} onClick={handleOnClick}>
       <StyledListItem style={{ flex: 1 }}>{item.id}</StyledListItem>
       <StyledListItem style={{ flex: 4 }}>{item.name}</StyledListItem>
       <StyledListItem style={{ flex: 4 }}>{item.name}</StyledListItem>
