@@ -7,11 +7,11 @@ interface Props {
   inputWidth: number
   fontSize: number
   label?: string
-  value?: string | number
+  defaultValue?: string | number
   onChange?: (text: string) => void
 }
 
-const InputWithLabel = ({ style, isEditMode = true, inputWidth, fontSize, label, value, onChange }: Props) => {
+const InputWithLabel = ({ style, isEditMode = true, inputWidth, fontSize, label, defaultValue, onChange }: Props) => {
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange && onChange(event.target.value)
   }
@@ -21,7 +21,7 @@ const InputWithLabel = ({ style, isEditMode = true, inputWidth, fontSize, label,
       {label && <div style={{ fontSize, paddingLeft: 4, paddingRight: 4 }}>{`${label}`}</div>}
       <StyledStatInput
         style={{ outline: 'none', fontSize: fontSize, width: inputWidth }}
-        value={value}
+        defaultValue={defaultValue}
         readOnly={!isEditMode}
         isEditMode={isEditMode}
         onChange={handleOnChange} />

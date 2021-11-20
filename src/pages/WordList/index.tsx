@@ -15,7 +15,8 @@ const WordList = (props: RouteComponentProps) => {
   const { words, getWordList } = useContext<IWordListContext>(WordListContext);
 
   useEffect(() => {
-    getWordList('this is jwlee');
+    //이거 string 으로 path 에서 받고 pagenation 처리 시작하자
+    getWordList('1');
   }, [getWordList])
 
   const handleOnItemClick = (item: WordItem) => {

@@ -1,4 +1,4 @@
 export interface IWordListContext {
-  getWordList: (id: string) => void;
+  getWordList: (page: string) => void;
   words: Array<Word> | undefined;
 }
