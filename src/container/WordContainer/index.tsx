@@ -9,11 +9,11 @@ import { produce } from 'immer'
 
 interface Props {
   style?: React.CSSProperties
-  wordId?: string
+  wordId?: number
 }
 
 const WordContainer = ({ style, wordId }: Props) => {
-  console.log("[WordContainer] start...");
+  console.log(`[WordContainer] start... wordId : ${wordId}}`);
 
   const { wordDetail, setWordDetail, getWordDetail } = useContext<IWordDetailContext>(WordDetailContext);
   const [name, setName] = useState<string>()
@@ -60,11 +60,17 @@ const WordContainer = ({ style, wordId }: Props) => {
         <InputWithLabel label='설명' value={description} fontSize={16} inputWidth={200} onChange={(value) => {
           setDescription(value)
         }} />
-        <InputWithLabel label='멤버2' value={description} fontSize={16} inputWidth={200} />
+        <InputWithLabel label='멤버2' value={description} fontSize={16} inputWidth={200} onChange={(value) => {
+          setDescription(value)
+        }} />
       </div>
       <div className='flex-column' style={{ paddingTop: GAP_CONTENT_HEIGHT }}>
-        여기 입력되게 바꾸기
-        {synonyms?.map((item, index) => <InputWithLabel key={`synonyms-${index}`} label='유의어' value={item} fontSize={16} inputWidth={200} />)}
+        {synonyms?.map((item, index) => <InputWithLabel key={`synonyms-${index}`} label='유의어' value={item} fontSize={16} inputWidth={200} onChange={(value) => {
+          setSynonyms(produce(synonyms, draft => {
+            draft[index] = value
+            console.log(draft.toString())
+          }))
+        }} />)}
       </div>
       <ConfirmCancelView
         style={{ marginTop: GAP_VIEW_HEIGHT, justifyContent: 'flex-end' }}
