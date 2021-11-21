@@ -15,7 +15,6 @@ const WordList = (props: RouteComponentProps) => {
   const { words, getWordList } = useContext<IWordListContext>(WordListContext);
 
   useEffect(() => {
-    //이거 string 으로 path 에서 받고 pagenation 처리 시작하자
     getWordList('1');
   }, [getWordList])
 
@@ -40,7 +39,6 @@ const WordList = (props: RouteComponentProps) => {
       <div className='flex-row' style={{ marginTop: GAP_VIEW_HEIGHT }}>
         <StyledListHeaderItem style={{ flex: 1 }}>번호</StyledListHeaderItem>
         <StyledListHeaderItem style={{ flex: 4 }}>이름</StyledListHeaderItem>
-        <StyledListHeaderItem style={{ flex: 4 }}>포인트</StyledListHeaderItem>
         <StyledListHeaderItem style={{ flex: 4 }}>레벨</StyledListHeaderItem>
         <StyledListHeaderItem style={{ flex: 5 }}>설명</StyledListHeaderItem>
       </div>
@@ -60,7 +58,6 @@ const WordItemView = (item: WordItem, onItemClick?: (item: WordItem) => void) =>
   return (
     <div className='flex-row' key={`word-item-${item.id}`} onClick={handleOnClick}>
       <StyledListItem style={{ flex: 1 }}>{item.id}</StyledListItem>
-      <StyledListItem style={{ flex: 4 }}>{item.name}</StyledListItem>
       <StyledListItem style={{ flex: 4 }}>{item.name}</StyledListItem>
       <StyledListItem style={{ flex: 4 }}>{item.level}</StyledListItem>
       <StyledListItem style={{ flex: 5 }}>{item.description}</StyledListItem>
