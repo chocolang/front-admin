@@ -1,5 +1,5 @@
-import React, { createContext, useCallback, useState } from "react";
-import { getSampleWordDetail, WordDetail } from "../../model/api/Word";
+import React, { createContext, useCallback, useEffect, useRef, useState } from "react";
+import { getSampleWordDetail, getSampleWords, WordDetail, WordItem } from "../../model/api/Word";
 import { IWordDetailContext } from "./@types";
 
 const defaultContext: IWordDetailContext = {
@@ -14,6 +14,7 @@ interface Props {
 }
 
 const WordDetailContextProvider = ({ children }: Props) => {
+  const refSampleWordDetails = useRef<Array<WordItem>>(getSampleWords())
   const [wordDetail, setWordDetail] = useState<WordDetail>()
 
   const getWordDetail = useCallback((id: string) => {
@@ -23,9 +24,11 @@ const WordDetailContextProvider = ({ children }: Props) => {
     setWordDetail(result);
   }, [])
 
-  const postWordDetail = useCallback((wordDetai: WordDetail, callback: () => void) => {
+  const postWordDetail = useCallback((wordDetail: WordDetail, callback: () => void) => {
     console.log('postWordDetail...')
     // api call
+    const index = refSampleWordDetails.current.findIndex(item => item.id === wordDetail.id)
+    refSampleWordDetails.current[index] = wordDetail
     callback()
   }, [])
 

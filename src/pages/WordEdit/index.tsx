@@ -8,7 +8,7 @@ import { StyledLargeMenu } from "../../styled/Text";
 const WordEdit = (props: RouteComponentProps) => {
   console.log("[WordWrite] start...");
 
-  const { history, location, match } = props
+  const { match } = props
   const params = match.params as { id: string }
 
   return (

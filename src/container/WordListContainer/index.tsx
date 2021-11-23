@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { RouteComponentProps, useHistory, useLocation, withRouter } from 'react-router'
+import { useHistory, useLocation } from 'react-router'
 import { WordListContext, WordListContextProvider } from '../../context/wordList';
 import { IWordListContext } from '../../context/wordList/@types';
 import { GAP_VIEW_HEIGHT } from '../../lib/constant';
@@ -57,30 +57,12 @@ const WordItemView = (item: WordItem, onItemClick?: (item: WordItem) => void) =>
   );
 };
 
-export default (
-  <div>ddd</div>
-)
+const ExportWordListContainer = (props: any) => {
+  return (
+    <WordListContextProvider>
+      <WordListContainer {...props} />
+    </WordListContextProvider>
+  );
+}
 
-// export default () => {
-//   return (
-//     <WordListContextProvider>
-//       <WordListContainer />
-//     </WordListContextProvider>
-//   );
-// };
-
-//export default WordListContainer
-
-// export default () => {
-//   return (
-//     <WordListContextProvider>
-//       <WordListContainer />
-//     </WordListContextProvider>
-//   )
-// }
-
-// export default (
-//   <WordListContextProvider>
-//     <WordListContainer/>
-//   </WordListContextProvider>
-// );
+export default ExportWordListContainer

@@ -1,16 +1,9 @@
-import React, { useContext, useEffect } from "react";
 import { RouteComponentProps } from "react-router";
 import '../../App.css'
-import ExportWordContainer from "../../container/WordContainer";
 import WordListContainer from "../../container/WordListContainer";
-import ExportWordListContainer from "../../container/WordListContainer";
-import { WordListContext, WordListContextProvider } from "../../context/wordList";
-import { IWordListContext } from "../../context/wordList/@types";
-import { GAP_VIEW_HEIGHT } from "../../lib/constant";
-import { WordItem } from "../../model/api/Word";
 import { StyledActionButton } from "../../styled/Button";
 import { StyledPageBody } from "../../styled/Common";
-import { StyledLargeMenu, StyledListItem, StyledListHeaderItem } from "../../styled/Text";
+import { StyledLargeMenu } from "../../styled/Text";
 
 const WordList = (props: RouteComponentProps) => {
   console.log("[WordList] start...");
