@@ -41,3 +41,10 @@ export function getSampleWordDetail(id: string): WordDetail {
   const index = words.findIndex(item => item.id === id)
   return words[index]
 }
+
+export function updateSampleWordDetail(wordDetail: WordDetail) {
+  console.log(`updateSampleWordDetail...${JSON.stringify(wordDetail)}`)
+  const index = words.findIndex(item => item.id === wordDetail.id)
+  words[index] = wordDetail
+  return true
+}

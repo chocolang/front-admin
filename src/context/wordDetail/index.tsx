@@ -1,10 +1,10 @@
 import React, { createContext, useCallback, useEffect, useRef, useState } from "react";
-import { getSampleWordDetail, getSampleWords, WordDetail, WordItem } from "../../model/api/Word";
+import { getSampleWordDetail, getSampleWords, updateSampleWordDetail, WordDetail, WordItem } from "../../model/api/Word";
 import { IWordDetailContext } from "./@types";
 
 const defaultContext: IWordDetailContext = {
   getWordDetail: () => { },
-  postWordDetail: (wordDetail: WordDetail, callback: () => void) => { },
+  updateWordDetail: (wordDetail: WordDetail, callback: () => void) => { },
   wordDetail: undefined,
 };
 const WordDetailContext = createContext(defaultContext);
@@ -24,19 +24,24 @@ const WordDetailContextProvider = ({ children }: Props) => {
     setWordDetail(result);
   }, [])
 
-  const postWordDetail = useCallback((wordDetail: WordDetail, callback: () => void) => {
-    console.log('postWordDetail...')
+  const updateWordDetail = useCallback((wordDetail: WordDetail, callback: () => void) => {
+    console.log('updateWordDetail...')
     // api call
-    const index = refSampleWordDetails.current.findIndex(item => item.id === wordDetail.id)
-    refSampleWordDetails.current[index] = wordDetail
+    updateSampleWordDetail(wordDetail)
     callback()
+  }, [])
+
+  const createWordDetail = useCallback((wordDetail: WordDetail, callback: () => void) => {
+    console.log('updateWordDetail...')
+    // api call
+
   }, [])
 
   return (
     <WordDetailContext.Provider
       value={{
         getWordDetail,
-        postWordDetail,
+        updateWordDetail,
         wordDetail,
       }}>
       {children}

@@ -44,7 +44,6 @@ const WordListContainer = () => {
 
 const WordItemView = (item: WordItem, onItemClick?: (item: WordItem) => void) => {
   const handleOnClick = () => {
-    console.log('clicked!', item.name)
     onItemClick && onItemClick(item)
   }
   return (

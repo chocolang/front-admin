@@ -14,8 +14,15 @@ interface Props {
 
 const WordContainer = ({ style, wordId }: Props) => {
   console.log(`[WordContainer] start... wordId : ${wordId}}`);
+
+  enum EditModeType {
+    UPDATE,
+    CREATE
+  }
+
   const history = useHistory()
-  const { wordDetail, getWordDetail, postWordDetail } = useContext<IWordDetailContext>(WordDetailContext);
+  const { wordDetail, getWordDetail, updateWordDetail } = useContext<IWordDetailContext>(WordDetailContext);
+  const [id, setId] = useState<string>()
   const [name, setName] = useState<string>()
   const [level, setLevel] = useState<number>()
   const [point, setPoint] = useState<number>()
@@ -31,6 +38,7 @@ const WordContainer = ({ style, wordId }: Props) => {
 
   useEffect(() => {
     if (wordDetail) {
+      setId(wordDetail.id)
       setName(wordDetail.name)
       setLevel(wordDetail.level)
       setPoint(wordDetail.point)
@@ -42,6 +50,11 @@ const WordContainer = ({ style, wordId }: Props) => {
   return (
     <div style={style}>
       <div className='flex-row'>
+        <InputWithLabel label='아이디' defaultValue={id} fontSize={30} inputWidth={200} onChange={(value) => {
+          setId(value)
+        }} />
+      </div>
+      <div className='flex-row' style={{ paddingTop: GAP_CONTENT_HEIGHT }}>
         <InputWithLabel label='이름' defaultValue={name} fontSize={30} inputWidth={200} onChange={(value) => {
           setName(value)
         }} />
@@ -74,9 +87,26 @@ const WordContainer = ({ style, wordId }: Props) => {
       <ConfirmCancelView
         style={{ marginTop: GAP_VIEW_HEIGHT, justifyContent: 'flex-end' }}
         onClickConfirm={() => {
-          wordDetail && postWordDetail(wordDetail, () => {
-            history.push('/wordList')
-          })
+          if (name && level && description && synonyms && point) {
+            var payload: any = {
+              name: name,
+              level: level,
+              description: description,
+              synonyms: synonyms,
+              point: point
+            }
+
+            if (wordId) {
+              payload.id = wordId
+              updateWordDetail(payload, () => {
+                history.push('/wordList')
+              })
+            } else {
+              // postWordDetail(payload, () => {
+              //   history.push('/wordList')
+              // })
+            }
+          }
         }}
         onClickCancel={() => {
           history.goBack()
