@@ -1,10 +1,14 @@
-import React, { createContext, useCallback, useEffect, useRef, useState } from "react";
-import { getSampleWordDetail, getSampleWords, updateSampleWordDetail, WordDetail, WordItem } from "../../model/api/Word";
+import React, { createContext, useCallback, useState } from "react";
+import * as wordAPI from "../../lib/api/Word";
+import { WordDetail } from "../../model/api/Word";
+import { CreateWordDetail } from "../../model/binding/CreateWordDetail";
+import { UpdateWordDetail } from "../../model/binding/UpdateWordDetail";
 import { IWordDetailContext } from "./@types";
 
 const defaultContext: IWordDetailContext = {
-  getWordDetail: () => { },
-  updateWordDetail: (wordDetail: WordDetail, callback: () => void) => { },
+  getWordDetail: (id: string) => { },
+  updateWordDetail: (id: string, wordDetail: UpdateWordDetail, callback: () => void) => { },
+  createWordDetail: (wordDetail: CreateWordDetail, callback: () => void) => { },
   wordDetail: undefined,
 };
 const WordDetailContext = createContext(defaultContext);
@@ -14,33 +18,42 @@ interface Props {
 }
 
 const WordDetailContextProvider = ({ children }: Props) => {
-  const refSampleWordDetails = useRef<Array<WordItem>>(getSampleWords())
   const [wordDetail, setWordDetail] = useState<WordDetail>()
 
   const getWordDetail = useCallback((id: string) => {
     console.log('getWordDetail...')
     // api call
-    const result = getSampleWordDetail(id);
-    setWordDetail(result);
+    wordAPI.wordDetail(id)
+      .then(data => {
+        console.log(JSON.stringify(data))
+        setWordDetail(data)
+      })
   }, [])
 
-  const updateWordDetail = useCallback((wordDetail: WordDetail, callback: () => void) => {
+  const updateWordDetail = useCallback((id: string, wordDetail: UpdateWordDetail, callback: () => void) => {
     console.log('updateWordDetail...')
     // api call
-    updateSampleWordDetail(wordDetail)
+    wordAPI.updateWordDetail(id, wordDetail)
+      .then(data => {
+        console.log('update complete!', JSON.stringify(data))
+      })
     callback()
   }, [])
 
-  const createWordDetail = useCallback((wordDetail: WordDetail, callback: () => void) => {
-    console.log('updateWordDetail...')
+  const createWordDetail = useCallback((wordDetail: CreateWordDetail, callback: () => void) => {
+    console.log('createWordDetail...')
     // api call
-
+    wordAPI.createWordDetail(wordDetail)
+      .then(data => {
+        console.log('create complete', JSON.stringify(data))
+      })
   }, [])
 
   return (
     <WordDetailContext.Provider
       value={{
         getWordDetail,
+        createWordDetail,
         updateWordDetail,
         wordDetail,
       }}>

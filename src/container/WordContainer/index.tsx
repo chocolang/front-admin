@@ -21,7 +21,7 @@ const WordContainer = ({ style, wordId }: Props) => {
   }
 
   const history = useHistory()
-  const { wordDetail, getWordDetail, updateWordDetail } = useContext<IWordDetailContext>(WordDetailContext);
+  const { wordDetail, getWordDetail, updateWordDetail, createWordDetail } = useContext<IWordDetailContext>(WordDetailContext);
   const [id, setId] = useState<string>()
   const [name, setName] = useState<string>()
   const [level, setLevel] = useState<number>()
@@ -87,7 +87,8 @@ const WordContainer = ({ style, wordId }: Props) => {
       <ConfirmCancelView
         style={{ marginTop: GAP_VIEW_HEIGHT, justifyContent: 'flex-end' }}
         onClickConfirm={() => {
-          if (name && level && description && synonyms && point) {
+          console.log(name, level, description, synonyms, point)
+          if (name && level && description && point) {
             var payload: any = {
               name: name,
               level: level,
@@ -97,15 +98,15 @@ const WordContainer = ({ style, wordId }: Props) => {
             }
 
             if (wordId) {
-              payload.id = wordId
-              updateWordDetail(payload, () => {
-                history.push('/wordList')
+              updateWordDetail(wordId, payload, () => {
+                alert('업데이트에 성공했습니다.')
               })
             } else {
-              // postWordDetail(payload, () => {
-              //   history.push('/wordList')
-              // })
+              createWordDetail(payload, () => {
+                alert('단어 생성에 성공했습니다.')
+              })
             }
+            history.push('/wordList')
           }
         }}
         onClickCancel={() => {

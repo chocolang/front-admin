@@ -14,7 +14,7 @@ const WordListContainer = () => {
   const { words, getWordList } = useContext<IWordListContext>(WordListContext);
 
   useEffect(() => {
-    getWordList('1');
+    getWordList(1, 0, 'keyword');
   }, [getWordList])
 
   console.log(JSON.stringify(location))

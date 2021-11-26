@@ -1,9 +1,10 @@
 import React, { createContext, useCallback, useState } from "react";
-import { getSampleWords, WordItem } from "../../model/api/Word";
+import * as wordAPI from "../../lib/api/Word";
+import { WordItem } from "../../model/api/Word";
 import { IWordListContext } from "./@types";
 
 const defaultContext: IWordListContext = {
-  getWordList: (page: string) => { },
+  getWordList: () => { },
   words: undefined,
 };
 const WordListContext = createContext(defaultContext);
@@ -15,11 +16,17 @@ interface Props {
 const WordListContextProvider = ({ children }: Props) => {
   const [words, setWords] = useState<Array<WordItem>>();
 
-  const getWordList = useCallback((page: string) => {
+  const getWordList = useCallback((sortType: number, page: number, keyword: string) => {
     console.log(`getWordList.. page: ${page}!`)
     // api call
-    const result = getSampleWords();
-    setWords(result);
+    wordAPI.wordList({
+      sortType,
+      page,
+      keyword
+    }).then(data => {
+      console.log(JSON.stringify(data))
+      setWords(data)
+    })
   }, [])
 
   return (
