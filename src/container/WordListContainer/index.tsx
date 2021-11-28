@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router'
-import { WordListContext, WordListContextProvider } from '../../context/wordList';
+import { WordListContext } from '../../context/wordList';
 import { IWordListContext } from '../../context/wordList/@types';
 import { GAP_VIEW_HEIGHT } from '../../lib/constant';
 import { WordItem } from '../../model/api/Word';
@@ -32,12 +32,9 @@ const WordListContainer = () => {
         <StyledListHeaderItem style={{ flex: 4 }}>레벨</StyledListHeaderItem>
         <StyledListHeaderItem style={{ flex: 5 }}>설명</StyledListHeaderItem>
       </div>
-
       <div className='flex-column' style={{ marginTop: GAP_VIEW_HEIGHT }}>
         {words?.map((item) => WordItemView(item, handleOnItemClick))}
       </div>
-
-
     </div>
   )
 }
@@ -56,12 +53,4 @@ const WordItemView = (item: WordItem, onItemClick?: (item: WordItem) => void) =>
   );
 };
 
-const ExportWordListContainer = (props: any) => {
-  return (
-    <WordListContextProvider>
-      <WordListContainer {...props} />
-    </WordListContextProvider>
-  );
-}
-
-export default ExportWordListContainer
+export default WordListContainer

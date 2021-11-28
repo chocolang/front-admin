@@ -1,13 +1,20 @@
 import { RouteComponentProps } from "react-router";
+import qs from 'qs';
 import '../../App.css'
+import PaginationContainer from "../../container/PaginationContainer";
 import WordListContainer from "../../container/WordListContainer";
+import { WordListContextProvider } from "../../context/wordList";
 import { StyledActionButton } from "../../styled/Button";
 import { StyledPageBody } from "../../styled/Common";
 import { StyledLargeMenu } from "../../styled/Text";
 
-const WordList = (props: RouteComponentProps) => {
+const Page = (props: RouteComponentProps) => {
   console.log("[WordList] start...");
-  const { history, /*location, match*/ } = props
+  const { history, location } = props
+
+  const { page = '1' } = qs.parse(location.search, {
+    ignoreQueryPrefix: true,
+  })
 
   return (
     <StyledPageBody>
@@ -23,8 +30,17 @@ const WordList = (props: RouteComponentProps) => {
         </div>
       </div>
       <WordListContainer />
+      <PaginationContainer page={parseInt(page as string, 10)} />
     </StyledPageBody>
   );
 };
+
+const WordList = (props: any) => {
+  return (
+    <WordListContextProvider>
+      <Page {...props} />
+    </WordListContextProvider>
+  );
+}
 
 export default WordList;

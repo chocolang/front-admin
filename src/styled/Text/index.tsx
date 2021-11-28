@@ -19,7 +19,7 @@ export const StyledListItem = styled.div`
   color: black;
   padding: 5px;
   text-align: center;
-  background-color: #eeeeee;
+  background-color: #cccccc;
   border: 1px solid blue;
 `
 

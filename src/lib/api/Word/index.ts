@@ -12,7 +12,7 @@ const WORD_LIST = WORD + 'list';
 export const WORD_LIST_CANCEL_KEY = 'word_list_cancel_key';
 
 const words = new Array<any>()
-for (var i = 0; i < 50; i++) {
+for (var i = 0; i < 10; i++) {
     words.push({ id: String(i), name: `word${i}`, level: (i % 3), description: "자동차", synonyms: ['truck'], point: 1000 + i },)
 }
 
