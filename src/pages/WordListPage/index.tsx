@@ -30,7 +30,7 @@ const Page = (props: RouteComponentProps) => {
         </div>
       </div>
       <WordListContainer />
-      <PaginationContainer page={parseInt(page as string, 10)} />
+      <PaginationContainer path={'/wordList'} page={parseInt(page as string, 10)} />
     </StyledPageBody>
   );
 };
