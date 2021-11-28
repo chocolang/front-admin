@@ -9,9 +9,9 @@ import { changeToken } from "./modules/auth";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import More from "./pages/More";
-import WordList from "./pages/WordList";
-import WordEdit from "./pages/WordEdit";
-import WordCreate from "./pages/WordCreate";
+import WordListPage from "./pages/WordListPage";
+import WordEditPage from "./pages/WordEditPage";
+import WordCreatePage from "./pages/WordCreatePage";
 
 function App() {
   console.log('[App] start...')
@@ -27,9 +27,9 @@ function App() {
       <Layout>
         <Route component={Home} path="/" exact></Route>
         <Route component={More} path="/more"></Route>
-        <Route component={WordList} path="/wordList"></Route>
-        <Route component={WordCreate} path="/WordCreate"></Route>
-        <Route component={WordEdit} path="/WordEdit/:id"></Route>
+        <Route component={WordListPage} path="/wordList"></Route>
+        <Route component={WordCreatePage} path="/WordCreate"></Route>
+        <Route component={WordEditPage} path="/WordEdit/:id"></Route>
       </Layout>
     </div>
   ) : (

@@ -35,7 +35,7 @@ const Page = (props: RouteComponentProps) => {
   );
 };
 
-const WordList = (props: any) => {
+const WordListPage = (props: any) => {
   return (
     <WordListContextProvider>
       <Page {...props} />
@@ -43,4 +43,4 @@ const WordList = (props: any) => {
   );
 }
 
-export default WordList;
+export default WordListPage;

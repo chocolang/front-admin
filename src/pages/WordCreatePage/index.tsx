@@ -5,7 +5,7 @@ import { GAP_VIEW_HEIGHT } from "../../lib/constant";
 import { StyledPageBody } from "../../styled/Common";
 import { StyledLargeMenu } from "../../styled/Text";
 
-const WordCreate = (props: RouteComponentProps) => {
+const WordCreatePage = (props: RouteComponentProps) => {
   console.log("[WordCreate] start...");
 
   return (
@@ -16,4 +16,4 @@ const WordCreate = (props: RouteComponentProps) => {
   );
 };
 
-export default WordCreate;
+export default WordCreatePage;

@@ -5,7 +5,7 @@ import { GAP_VIEW_HEIGHT } from "../../lib/constant";
 import { StyledPageBody } from "../../styled/Common";
 import { StyledLargeMenu } from "../../styled/Text";
 
-const WordEdit = (props: RouteComponentProps) => {
+const WordEditPage = (props: RouteComponentProps) => {
   console.log("[WordWrite] start...");
   const { id } = props.match.params as { id: string }
 
@@ -17,4 +17,4 @@ const WordEdit = (props: RouteComponentProps) => {
   );
 };
 
-export default WordEdit;
+export default WordEditPage;
