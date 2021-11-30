@@ -34,8 +34,7 @@ const WordListContextProvider = ({ children }: Props) => {
       value={{
         getWordList,
         words,
-      }}
-    >
+      }}>
       {children}
     </WordListContext.Provider>
   );

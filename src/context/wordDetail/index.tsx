@@ -46,6 +46,8 @@ const WordDetailContextProvider = ({ children }: Props) => {
     wordAPI.createWordDetail(wordDetail)
       .then(data => {
         console.log('create complete', JSON.stringify(data))
+      }).catch(error => {
+        console.log(JSON.stringify(error))
       })
   }, [])
 

@@ -29,8 +29,8 @@ const Page = (props: RouteComponentProps) => {
           }}>목록</StyledActionButton>
         </div>
       </div>
-      <WordListContainer />
-      <PaginationContainer path={'/wordList'} page={parseInt(page as string, 10)} />
+      <WordListContainer page={parseInt(page as string)}/>
+      <PaginationContainer path={'/wordList'} page={parseInt(page as string)} />
     </StyledPageBody>
   );
 };

@@ -12,12 +12,13 @@ const WORD_LIST = WORD + 'list';
 export const WORD_LIST_CANCEL_KEY = 'word_list_cancel_key';
 
 const words = new Array<any>()
-for (var i = 0; i < 10; i++) {
+for (var i = 0; i < 500; i++) {
     words.push({ id: String(i), name: `word${i}`, level: (i % 3), description: "자동차", synonyms: ['truck'], point: 1000 + i },)
 }
 
 export var cancelerWordList: Canceler | undefined
 export const wordList = async (payload: WordListParam) => {
+    const viewCount = 10
     if (cancelerWordList) {
         cancelerWordList(WORD_LIST_CANCEL_KEY)
     }
@@ -37,7 +38,8 @@ export const wordList = async (payload: WordListParam) => {
         // cancelerArticlesSearchList = undefined
         // return response
 
-        return words as Array<WordItem>
+        const startIndex = (payload.page - 1) * viewCount
+        return words.slice(startIndex, startIndex + 10) as Array<WordItem>
     } catch (error) {
         if (error instanceof Error) {
             if (error.message === WORD_LIST_CANCEL_KEY) {

@@ -6,7 +6,11 @@ import { GAP_VIEW_HEIGHT } from '../../lib/constant';
 import { WordItem } from '../../model/api/Word';
 import { StyledListHeaderItem, StyledListItem } from '../../styled/Text';
 
-const WordListContainer = () => {
+interface Props {
+  page: number
+}
+
+const WordListContainer = ({ page }: Props) => {
   console.log(`[WordListContainer] start...`);
   const location = useLocation();
   const history = useHistory();
@@ -14,8 +18,8 @@ const WordListContainer = () => {
   const { words, getWordList } = useContext<IWordListContext>(WordListContext);
 
   useEffect(() => {
-    getWordList(1, 0, 'keyword');
-  }, [getWordList])
+    getWordList(1, page, 'keyword');
+  }, [getWordList, page])
 
   console.log(JSON.stringify(location))
   console.log(JSON.stringify(history))

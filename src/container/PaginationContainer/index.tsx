@@ -17,14 +17,20 @@ const PaginationContainer = ({ path, page }: Props) => {
     return (
         <Pagination
             style={{ marginTop: GAP_VIEW_HEIGHT }}
-            totalPageCount={35}
+            totalPageCount={words?.length + 1}
             currentPage={page}
             onClick={(page) => {
                 const query = qs.stringify({ page })
                 history.push(`${path}?${query}`)
             }}
-            onClickPrev={() => { }}
-            onClickNext={() => { }} />
+            onClickPrev={() => {
+                const query = qs.stringify({ page: page - 1 })
+                history.push(`${path}?${query}`)
+            }}
+            onClickNext={() => {
+                const query = qs.stringify({ page: page + 1 })
+                history.push(`${path}?${query}`)
+            }} />
     )
 }
 

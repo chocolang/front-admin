@@ -88,26 +88,26 @@ const WordContainer = ({ style, wordId }: Props) => {
         style={{ marginTop: GAP_VIEW_HEIGHT, justifyContent: 'flex-end' }}
         onClickConfirm={() => {
           console.log(name, level, description, synonyms, point)
-          if (name && level && description && point) {
-            var payload: any = {
-              name: name,
-              level: level,
-              description: description,
-              synonyms: synonyms,
-              point: point
-            }
-
-            if (wordId) {
-              updateWordDetail(wordId, payload, () => {
-                alert('업데이트에 성공했습니다.')
-              })
-            } else {
-              createWordDetail(payload, () => {
-                alert('단어 생성에 성공했습니다.')
-              })
-            }
-            history.push('/wordList')
+          var payload: any = {
+            name: name,
+            level: level,
+            description: description,
+            synonyms: synonyms,
+            point: point
           }
+
+          console.log('A1')
+          if (wordId !== undefined) {
+            updateWordDetail(wordId, payload, () => {
+              alert('업데이트에 성공했습니다.')
+            })
+          } else {
+            console.log('단어 생성! 합니다')
+            createWordDetail(payload, () => {
+              alert('단어 생성에 성공했습니다.')
+            })
+          }
+          history.push('/wordList')
         }}
         onClickCancel={() => {
           history.goBack()
