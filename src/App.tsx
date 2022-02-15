@@ -12,6 +12,7 @@ import More from "./pages/More";
 import WordListPage from "./pages/WordListPage";
 import WordEditPage from "./pages/WordEditPage";
 import WordCreatePage from "./pages/WordCreatePage";
+import WordPage from "./pages/WordPage/indext";
 
 function App() {
   console.log('[App] start...')
@@ -28,8 +29,9 @@ function App() {
         <Route component={Home} path="/" exact></Route>
         <Route component={More} path="/more"></Route>
         <Route component={WordListPage} path="/wordList"></Route>
-        <Route component={WordCreatePage} path="/WordCreate"></Route>
-        <Route component={WordEditPage} path="/WordEdit/:id"></Route>
+        <Route component={WordCreatePage} path="/wordCreate"></Route>
+        <Route component={WordPage} path="/wordPage/:id"></Route>
+        <Route component={WordEditPage} path="/wordEdit/:id"></Route>
       </Layout>
     </div>
   ) : (

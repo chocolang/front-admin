@@ -13,25 +13,24 @@ interface Props {
 
 const PaginationContainer = ({ path, page }: Props) => {
     const history = useHistory()
-    const { words, getWordList } = useContext<IWordListContext>(WordListContext);
-    return (
-        <Pagination
-            style={{ marginTop: GAP_VIEW_HEIGHT }}
-            totalPageCount={words?.length + 1}
-            currentPage={page}
-            onClick={(page) => {
-                const query = qs.stringify({ page })
-                history.push(`${path}?${query}`)
-            }}
-            onClickPrev={() => {
-                const query = qs.stringify({ page: page - 1 })
-                history.push(`${path}?${query}`)
-            }}
-            onClickNext={() => {
-                const query = qs.stringify({ page: page + 1 })
-                history.push(`${path}?${query}`)
-            }} />
-    )
+    const { pagination } = useContext<IWordListContext>(WordListContext);
+    return pagination ? <Pagination
+        style={{ marginTop: GAP_VIEW_HEIGHT }}
+        pageSize={10}
+        currentPage={page}
+        totalItemCount={pagination.totalItemCount}
+        onClick={(page) => {
+            const query = qs.stringify({ page })
+            history.push(`${path}?${query}`)
+        }}
+        onClickPrev={() => {
+            const query = qs.stringify({ page: page - 1 })
+            history.push(`${path}?${query}`)
+        }}
+        onClickNext={() => {
+            const query = qs.stringify({ page: page + 1 })
+            history.push(`${path}?${query}`)
+        }} /> : <div></div>
 }
 
 export default PaginationContainer

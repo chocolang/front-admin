@@ -3,8 +3,9 @@ import styled from "styled-components";
 
 interface Props {
   style?: React.CSSProperties
-  totalPageCount: number,
+  pageSize: number,
   currentPage: number
+  totalItemCount: number,
   onClick: (page: number) => void
   onClickPrev: () => void
   onClickNext: () => void
@@ -22,11 +23,20 @@ const StyledPreNextButton = styled.div`
   margin-right: 4px;
 `
 
-const Pagination = ({ style, totalPageCount, currentPage, onClick, onClickNext, onClickPrev }: Props) => {
-  var start = Math.floor((currentPage - 1) / 10) * 10 + 1
-  var end = start + 9
+const Pagination = ({ style, pageSize, totalItemCount, currentPage, onClick, onClickNext, onClickPrev }: Props) => {
+  var start = Math.floor((currentPage - 1) / pageSize) * pageSize + 1
+  var totalPageCount = Math.ceil(totalItemCount / pageSize)
   var lastCnt = totalPageCount % 10
-  var cnt = totalPageCount < end ? 10 - lastCnt : 10
+  var lastStart = (Math.floor(totalPageCount / 10) * 10) + 1
+  var cnt = (start === lastStart) ? lastCnt : 10
+
+  console.log('currentPage:', currentPage)
+  console.log('totalItemCount:', totalItemCount)
+  console.log('totalPageCount:', totalPageCount)
+  console.log('start:', start)
+  console.log('lastCnt:', lastCnt)
+  console.log('lastStart:', lastStart)
+  console.log('cnt:', cnt)
 
   const range = Array.from(new Array(cnt), (_, key) => key + start)
   return (
@@ -42,7 +52,7 @@ const Pagination = ({ style, totalPageCount, currentPage, onClick, onClickNext, 
           }}
         >{item}</StyledPaginationButton>)
       })}
-      {(currentPage <= (totalPageCount - lastCnt)) && <StyledPreNextButton onClick={onClickNext}>다음</StyledPreNextButton>}
+      {totalPageCount !== currentPage && <StyledPreNextButton onClick={onClickNext}>다음</StyledPreNextButton>}
     </div>
   )
 }

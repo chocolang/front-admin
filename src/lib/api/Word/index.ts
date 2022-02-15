@@ -1,19 +1,30 @@
 import qs from 'qs';
 import axios, { Canceler } from 'axios';
 import { ContentType, getClient, getConfigure } from '../client';
-import { WordListParam } from './model';
-import { WordDetail, WordItem } from '../../../model/api/Word';
-import { UpdateWordDetail } from '../../../model/binding/UpdateWordDetail';
-import { CreateWordDetail } from '../../../model/binding/CreateWordDetail';
+import { WordListParam, WordListResult } from './model';
+import { BaseWord, PartsOfSpeechType, WordDetail, WordItem, WordUpdate } from '../../../model/api/Word';
+import { IncludedClassType } from '../../../model/api';
 
 export const WORD = 'word/';
 const WORD_LIST = WORD + 'list';
 
 export const WORD_LIST_CANCEL_KEY = 'word_list_cancel_key';
 
-const words = new Array<any>()
-for (var i = 0; i < 500; i++) {
-    words.push({ id: String(i), name: `word${i}`, level: (i % 3), description: "자동차", synonyms: ['truck'], point: 1000 + i },)
+const words = new Array<WordItem>()
+for (var i = 0; i < 11; i++) {
+    words.push({
+        id: i,
+        phonetic: `word-phonetic-${i}`,
+        from: `word-from-${i}`,
+        to: `단어-to-${i}`,
+        level: (i % 3),
+        includedClass: [IncludedClassType.MIDDLE],
+        partsOfSpeech: PartsOfSpeechType.ADVERB,
+        imageUrls: ['http://m.navert.com/image1.jpeg'],
+        description: `이 단어의 어원은 ${i}의 로마자인 ${i} 에서 부터 온 단어이다`,
+        synonyms: ['truck'],
+        point: 1000 + i
+    })
 }
 
 export var cancelerWordList: Canceler | undefined
@@ -39,7 +50,13 @@ export const wordList = async (payload: WordListParam) => {
         // return response
 
         const startIndex = (payload.page - 1) * viewCount
-        return words.slice(startIndex, startIndex + 10) as Array<WordItem>
+        return {
+            item: words.slice(startIndex, startIndex + 10),
+            pagination: {
+                totalItemCount: words.length,
+                totalPageCount: (words.length / 10) + (words.length % 10 === 0 ? 0 : 1)
+            }
+        }
     } catch (error) {
         if (error instanceof Error) {
             if (error.message === WORD_LIST_CANCEL_KEY) {
@@ -50,7 +67,27 @@ export const wordList = async (payload: WordListParam) => {
     }
 }
 
-export const wordDetail = async (id: string) => {
+export const wordDetail = async (id1: number) => {
+    console.log('api wordDetail...', JSON.stringify(words, null, 4), id1)
+    const configure = getConfigure(ContentType.none)
+    try {
+        // const response = await getClient('api').get<WordDetail>(
+        //     WORD + id,
+        //     configure
+        // )
+        // return response
+
+
+
+        const index = words.findIndex(item => item.id === Number(id1))
+        console.log('find index', index)
+        return words[index] as WordDetail
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const wordUpdate = async (id: number) => {
     const configure = getConfigure(ContentType.none)
     try {
         // const response = await getClient('api').get<WordDetail>(
@@ -60,13 +97,13 @@ export const wordDetail = async (id: string) => {
         // return response
 
         const index = words.findIndex(item => item.id === id)
-        return words[index] as WordDetail
+        return words[index] as WordUpdate
     } catch (error) {
         throw error;
     }
 }
 
-export const updateWordDetail = async (id: string, payload: UpdateWordDetail) => {
+export const updateWordDetail = async (id: number, payload: BaseWord) => {
     const configure = getConfigure(ContentType.none)
     try {
         // const response = await getClient('api').put(
@@ -77,15 +114,14 @@ export const updateWordDetail = async (id: string, payload: UpdateWordDetail) =>
         // return response
 
         const index = words.findIndex(item => item.id === id)
-        payload.id = id
-        words[index] = payload
+        words[index] = { ...payload, id: id }
         return index
     } catch (error) {
         throw error;
     }
 }
 
-export const createWordDetail = async (payload: CreateWordDetail) => {
+export const createWordDetail = async (payload: BaseWord) => {
     const configure = getConfigure(ContentType.none)
     try {
         // const response = await getClient('api').post(
@@ -96,8 +132,8 @@ export const createWordDetail = async (payload: CreateWordDetail) => {
         // return response
 
         var index = words.length;
-        words.push(payload)
-        words[index].id = String(index)
+        var temp = { ...payload, id: Number(index) }
+        words.push(temp)
         return index
     } catch (error) {
         throw error;

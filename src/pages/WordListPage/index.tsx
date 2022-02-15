@@ -9,7 +9,7 @@ import { StyledPageBody } from "../../styled/Common";
 import { StyledLargeMenu } from "../../styled/Text";
 
 const Page = (props: RouteComponentProps) => {
-  console.log("[WordList] start...");
+  console.log("[WordListPage] start...");
   const { history, location } = props
 
   const { page = '1' } = qs.parse(location.search, {

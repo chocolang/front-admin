@@ -9,7 +9,7 @@ import { produce } from 'immer'
 
 interface Props {
   style?: React.CSSProperties
-  wordId?: string
+  wordId?: number
 }
 
 const WordContainer = ({ style, wordId }: Props) => {
@@ -21,12 +21,17 @@ const WordContainer = ({ style, wordId }: Props) => {
   }
 
   const history = useHistory()
-  const { wordDetail, getWordDetail, updateWordDetail, createWordDetail } = useContext<IWordDetailContext>(WordDetailContext);
-  const [id, setId] = useState<string>()
-  const [name, setName] = useState<string>()
+  const {
+    wordDetail,
+    getWordDetail,
+    updateWordDetail,
+    createWordDetail } = useContext<IWordDetailContext>(WordDetailContext);
+  const [id, setId] = useState<number>()
+  const [from, setFrom] = useState<string>()
+  const [to, setTo] = useState<string>('')
   const [level, setLevel] = useState<number>()
   const [point, setPoint] = useState<number>()
-  const [description, setDescription] = useState<string>('')
+
   const [synonyms, setSynonyms] = useState<Array<string>>()
   const contentsImages = ['이미지1', '이미지2', '이미지3']
 
@@ -39,10 +44,10 @@ const WordContainer = ({ style, wordId }: Props) => {
   useEffect(() => {
     if (wordDetail) {
       setId(wordDetail.id)
-      setName(wordDetail.name)
+      setFrom(wordDetail.from)
+      setTo(wordDetail.to)
       setLevel(wordDetail.level)
       setPoint(wordDetail.point)
-      setDescription(wordDetail.description)
       setSynonyms(wordDetail.synonyms)
     }
   }, [wordDetail])
@@ -50,13 +55,11 @@ const WordContainer = ({ style, wordId }: Props) => {
   return (
     <div style={style}>
       <div className='flex-row'>
-        <InputWithLabel label='아이디' defaultValue={id} fontSize={30} inputWidth={200} onChange={(value) => {
-          setId(value)
-        }} />
+        <InputWithLabel label='아이디' defaultValue={id} fontSize={30} inputWidth={200} />
       </div>
       <div className='flex-row' style={{ paddingTop: GAP_CONTENT_HEIGHT }}>
-        <InputWithLabel label='이름' defaultValue={name} fontSize={30} inputWidth={200} onChange={(value) => {
-          setName(value)
+        <InputWithLabel label='프롬' defaultValue={from} fontSize={30} inputWidth={200} onChange={(value) => {
+          setFrom(value)
         }} />
         <InputWithLabel label='레벨' defaultValue={level} fontSize={16} inputWidth={50} onChange={(value) => {
           setLevel(Number(value))
@@ -69,11 +72,11 @@ const WordContainer = ({ style, wordId }: Props) => {
         {contentsImages.map((image, index) => <img key={`img-${index}`} style={{ height: 100, width: 100 }}></img>)}
       </div>
       <div className='flex-row' style={{ paddingTop: GAP_CONTENT_HEIGHT }}>
-        <InputWithLabel label='설명' defaultValue={description} fontSize={16} inputWidth={200} onChange={(value) => {
-          setDescription(value)
+        <InputWithLabel label='설명' defaultValue={to} fontSize={16} inputWidth={200} onChange={(value) => {
+          setTo(value)
         }} />
-        <InputWithLabel label='멤버2' defaultValue={description} fontSize={16} inputWidth={200} onChange={(value) => {
-          setDescription(value)
+        <InputWithLabel label='멤버2' defaultValue={to} fontSize={16} inputWidth={200} onChange={(value) => {
+          setTo(value)
         }} />
       </div>
       <div className='flex-column' style={{ paddingTop: GAP_CONTENT_HEIGHT }}>
@@ -87,11 +90,11 @@ const WordContainer = ({ style, wordId }: Props) => {
       <ConfirmCancelView
         style={{ marginTop: GAP_VIEW_HEIGHT, justifyContent: 'flex-end' }}
         onClickConfirm={() => {
-          console.log(name, level, description, synonyms, point)
+          console.log(from, level, to, synonyms, point)
           var payload: any = {
-            name: name,
+            from: from,
             level: level,
-            description: description,
+            to: to,
             synonyms: synonyms,
             point: point
           }
@@ -116,12 +119,4 @@ const WordContainer = ({ style, wordId }: Props) => {
   )
 }
 
-const ExportWordContainer = (props: any) => {
-  return (
-    <WordDetailContextProvider>
-      <WordContainer {...props} />
-    </WordDetailContextProvider>
-  );
-};
-
-export default ExportWordContainer
+export default WordContainer

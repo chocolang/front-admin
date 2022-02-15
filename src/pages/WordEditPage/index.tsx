@@ -12,7 +12,7 @@ const WordEditPage = (props: RouteComponentProps) => {
   return (
     <StyledPageBody>
       <StyledLargeMenu>단어 수정/생성</StyledLargeMenu>
-      <WordContainer style={{ marginTop: GAP_VIEW_HEIGHT }} wordId={id} />
+      <WordContainer style={{ marginTop: GAP_VIEW_HEIGHT }} wordId={parseInt(id)} />
     </StyledPageBody>
   );
 };
