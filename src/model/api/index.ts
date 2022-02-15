@@ -6,7 +6,6 @@ export enum IncludedClassType {
   UNIVERSITY,
 }
 
-여기서부터
 export interface FromTo {
   value: string,
   code: string,
