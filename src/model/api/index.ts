@@ -1,12 +1,13 @@
 export enum IncludedClassType {
-  KINDERGARTEN,
-  ELEMENTARY,
-  MIDDLE,
-  HIGH,
-  UNIVERSITY,
+  KINDERGARTEN = '유아',
+  ELEMENTARY = '초등',
+  MIDDLE = '중등',
+  HIGH = '고등',
+  UNIVERSITY = '대학',
 }
 
 export interface FromTo {
   value: string,
   code: string,
+  phonetic: string;
 }

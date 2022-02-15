@@ -44,8 +44,8 @@ const WordContainer = ({ style, wordId }: Props) => {
   useEffect(() => {
     if (wordDetail) {
       setId(wordDetail.id)
-      setFrom(wordDetail.from)
-      setTo(wordDetail.to)
+      setFrom(wordDetail.from.value)
+      setTo(wordDetail.to.code)
       setLevel(wordDetail.level)
       setPoint(wordDetail.point)
       setSynonyms(wordDetail.synonyms)

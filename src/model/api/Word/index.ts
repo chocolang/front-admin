@@ -3,11 +3,10 @@ import { Reply } from "../Reply";
 import { Sentence } from "../Sentence";
 
 export interface BaseWord {
-  phonetic: string;
   from: FromTo;
   to: FromTo;
   level: number;
-  includedClass: Array<IncludedClassType>
+  includedClass: IncludedClassType
   partsOfSpeech: PartsOfSpeechType
   imageUrls: Array<string>,
   description: string;

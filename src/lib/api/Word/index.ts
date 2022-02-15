@@ -14,9 +14,8 @@ const words = new Array<WordItem>()
 for (var i = 0; i < 11; i++) {
     words.push({
         id: i,
-        phonetic: `word-phonetic-${i}`,
-        from: `word-from-${i}`,
-        to: `단어-to-${i}`,
+        from: { value: `word-${i}`, code: 'ENG', phonetic: `word-phonetic-${i}`, },
+        to: { value: `단어-${i}`, code: 'KOR', phonetic: `단어-발음-${i}`, },
         level: (i % 3),
         includedClass: [IncludedClassType.MIDDLE],
         partsOfSpeech: PartsOfSpeechType.ADVERB,
