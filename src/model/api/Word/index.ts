@@ -30,13 +30,12 @@ export interface WordDetail extends BaseWord {
 }
 
 export enum PartsOfSpeechType {
-  VERB,
-  NOUN,
-  PRONOUN,
-  ADJECTIVE,
-  ADVERB,
-  ARTICLE,
-  PREPOSITION,
-  CONJUNCTION,
-  INTERJECTION
+  VERB = '동사',
+  NOUN = '명사',
+  PRONOUN = '대명사',
+  ADJECTIVE = '형용사',
+  ADVERB = '부사',
+  ARTICLE = '관사',
+  PREPOSITION = '전치사',
+  CONJUNCTION = '접속사',
 }

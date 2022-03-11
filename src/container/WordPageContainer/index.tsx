@@ -86,8 +86,14 @@ const WordPageContainer = ({ style, wordId }: Props) => {
         </StyledGroupLarge>
         <StyledGroupLarge style={{ marginBottom: 0 }}>
           <InputWithLabel
-            label="클래스"
+            label={'클래스'}
             defaultValue={wordDetail.includedClass}
+            isEditMode={false}
+            fontSize={ChocoFont.subContent}
+            inputWidth={100} />
+          <InputWithLabel
+            label={'품사'}
+            defaultValue={wordDetail.partsOfSpeech}
             isEditMode={false}
             fontSize={ChocoFont.subContent}
             inputWidth={100} />

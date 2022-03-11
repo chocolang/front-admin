@@ -50,7 +50,8 @@ const WordItemView = (item: WordItem, onItemClick?: (item: WordItem) => void) =>
   return (
     <div className='flex-row' key={`word-item-${item.id}`} onClick={handleOnClick}>
       <StyledListItem style={{ flex: 1 }}>{item.id}</StyledListItem>
-      <StyledListItem style={{ flex: 4 }}>{item.from}</StyledListItem>
+      <StyledListItem style={{ flex: 4 }}>{item.from.code}</StyledListItem>
+      <StyledListItem style={{ flex: 4 }}>{item.from.value}</StyledListItem>
       <StyledListItem style={{ flex: 4 }}>{item.level}</StyledListItem>
       <StyledListItem style={{ flex: 5 }}>{item.description}</StyledListItem>
     </div>
