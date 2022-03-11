@@ -14,10 +14,10 @@ const words = new Array<WordItem>()
 for (var i = 0; i < 11; i++) {
     words.push({
         id: i,
-        from: { value: `word-${i}`, code: 'ENG', phonetic: `word-phonetic-${i}`, },
-        to: { value: `단어-${i}`, code: 'KOR', phonetic: `단어-발음-${i}`, },
+        from: { value: `word-${i}`, code: 'ENG' },
+        to: { value: `단어-${i}`, code: 'KOR' },
         level: (i % 3),
-        includedClass: [IncludedClassType.MIDDLE],
+        includedClass: IncludedClassType.MIDDLE,
         partsOfSpeech: PartsOfSpeechType.ADVERB,
         imageUrls: ['http://m.navert.com/image1.jpeg'],
         description: `이 단어의 어원은 ${i}의 로마자인 ${i} 에서 부터 온 단어이다`,

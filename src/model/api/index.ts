@@ -9,5 +9,4 @@ export enum IncludedClassType {
 export interface FromTo {
   value: string,
   code: string,
-  phonetic: string;
 }

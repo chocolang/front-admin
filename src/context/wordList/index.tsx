@@ -29,7 +29,7 @@ const WordListContextProvider = ({ children }: Props) => {
       page,
       keyword
     }).then(data => {
-      console.log(JSON.stringify(data))
+      console.log(JSON.stringify(data, null, 4))
       setWords(data.item)
       setPagination(data.pagination)
     })

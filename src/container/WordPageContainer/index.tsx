@@ -32,7 +32,7 @@ const WordPageContainer = ({ style, wordId }: Props) => {
   return (
     <div style={style}>
       {wordDetail && <StyledRow>
-        <StyledGroupLarge style={{ marginTop: 0 }}>
+        {/* <StyledGroupLarge style={{ marginTop: 0 }}>
           <InputWithLabel
             label="ID"
             defaultValue={wordDetail.id}
@@ -91,7 +91,7 @@ const WordPageContainer = ({ style, wordId }: Props) => {
             isEditMode={false}
             fontSize={ChocoFont.subContent}
             inputWidth={100} />
-        </StyledGroupLarge>
+        </StyledGroupLarge> */}
       </StyledRow>}
     </div>
   )
