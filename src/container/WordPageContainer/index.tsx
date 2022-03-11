@@ -32,7 +32,7 @@ const WordPageContainer = ({ style, wordId }: Props) => {
   return (
     <div style={style}>
       {wordDetail && <StyledRow>
-        {/* <StyledGroupLarge style={{ marginTop: 0 }}>
+        <StyledGroupLarge style={{ marginTop: 0 }}>
           <InputWithLabel
             label="ID"
             defaultValue={wordDetail.id}
@@ -62,12 +62,6 @@ const WordPageContainer = ({ style, wordId }: Props) => {
               isEditMode={false}
               fontSize={ChocoFont.content}
               inputWidth={200} />
-            <InputWithLabel style={{ marginTop: 10 }}
-              label={'발음기호'}
-              defaultValue={wordDetail.from.phonetic}
-              isEditMode={false}
-              fontSize={ChocoFont.content}
-              inputWidth={200} />
           </div>
           <div style={{ marginLeft: 20 }}>
             <InputWithLabel
@@ -76,22 +70,22 @@ const WordPageContainer = ({ style, wordId }: Props) => {
               isEditMode={false}
               fontSize={ChocoFont.content}
               inputWidth={200} />
-            <InputWithLabel style={{ marginTop: 10 }}
-              label={'발음기호'}
-              defaultValue={wordDetail.to.phonetic}
-              isEditMode={false}
-              fontSize={ChocoFont.content}
-              inputWidth={200} />
           </div>
         </StyledGroupLarge>
         <StyledGroupLarge style={{ marginBottom: 0 }}>
           <InputWithLabel
-            label="클래스"
+            label={'클래스'}
             defaultValue={wordDetail.includedClass}
             isEditMode={false}
             fontSize={ChocoFont.subContent}
             inputWidth={100} />
-        </StyledGroupLarge> */}
+          <InputWithLabel
+            label={'품사'}
+            defaultValue={wordDetail.partsOfSpeech}
+            isEditMode={false}
+            fontSize={ChocoFont.subContent}
+            inputWidth={100} />
+        </StyledGroupLarge>
       </StyledRow>}
     </div>
   )
